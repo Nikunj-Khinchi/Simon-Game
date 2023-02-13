@@ -10,26 +10,26 @@ let userClickedPattern = [];
 
 var level = 0;
 
-var started = false; 
-  
+var started = false;
+
 $(".reload").hide();
 
 // Exit  button 
-$(".Exit").on("click",function(){
+$(".Exit").on("click", function () {
     if (window.confirm("Do you really want to leave?")) {
         window.close();
-      }
+    }
 })
 
 
-$(".st-btn").on("click" , function(){
-    if(!started){
+$(".st-btn").on("click", function () {
+    if (!started) {
         $("#level-title").text("level " + level);
         // hide start button after game start 
         // and add some css for how button will show after game start
         $(".st-btn").html("Start").hide();
         $(".reload").show();
-        $(".reload").css("margin-left",0)
+        $(".reload").css("margin-left", 0)
         $(".Exit").hide();
         nextSequence();
         started = true;
@@ -51,7 +51,7 @@ $(".btn").on("click", function () {
     //  this will give the value of clicked button
     // attr is return attributes and values of the selected elements 
     // $(this) will trigger the tapped button action  
-    
+
     var userChosenColour = $(this).attr("id");
 
     // console.log(userChosenColour)
@@ -73,7 +73,7 @@ $(".btn").on("click", function () {
 
 function checkAnswer(currentLevel) {
     // this if function for start the game if u didn't press a Start button then it will not go to else function cuz in our first if we check the value of buttton which we pressed userClickedPattern and also check gamePattern value and our gamePattern array will store value when we press Start button else it will not store any value and its value is undefined so with ! symbol (!gamePattern[currentLevel]) so our value is true so here our both condition is true userClicked  which we pressed and our gamePattern value is truee so condition satisfied 
-    
+
     if (userClickedPattern[currentLevel] && !gamePattern[currentLevel]) {
         return;
     }
@@ -89,33 +89,32 @@ function checkAnswer(currentLevel) {
         playSounds("wrong");
         $("body").addClass("game-over");
 
-// this is for show our start-again button which we hide after clicking the start button after game start 
-$(".st-btn").show();
-        if(level <= 8)
-        {
-            $("#level-title").html("Game Over!! Nice Try, <br> Total level you cleared : " + level   );
+        // this is for show our start-again button which we hide after clicking the start button after game start 
+        $(".st-btn").show();
+        if (level <= 8) {
+            $("#level-title").html("Game Over!! Nice Try, <br> Total level you cleared : " + level);
         }
-        else{
-            $("#level-title").html("Game Over !! You Played well, <br> Total level you cleared : " + level );
+        else {
+            $("#level-title").html("Game Over !! You Played well, <br> Total level you cleared : " + level);
         }
 
         // add some css with this event if press wrong color then how our button will show 
         $(".st-btn").html("Restart");
         $(".reload").hide();
         $(".Exit").show();
-        
-        
+
+
         // this timeout for if u click button and its wrong then our body add game over class and game over class have red background so its add after timeout this class is remove 
-       setTimeout(function () {
+        setTimeout(function () {
             $("body").removeClass("game-over");
-        }, 900);  
-           // start over function is for reset game with press any key 
+        }, 900);
+        // start over function is for reset game with press any key 
         startOver()
-    
 
-      
 
-        
+
+
+
     }
 }
 
@@ -147,7 +146,7 @@ function nextSequence() {
 
     // here userClickedpattern should be empty if its not the then random value came but if u follow pattern then its game over u press wrong button so and if u didnt follow pattern just press button which came randomly so game will continue but here our game is for pattern follow if u follow pattern then u will go to another level thats why here we did userClickedPattern to  empty   
     userClickedPattern = [];
-console.log(userClickedPattern);
+    console.log(userClickedPattern);
     level++;
     $("#level-title").text("Level - " + level);
     // random number generate
